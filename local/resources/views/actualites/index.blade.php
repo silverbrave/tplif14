@@ -17,10 +17,13 @@
     <!-- Custom CSS -->
     <style>
         body {
-            background-color: orange;
+            background-color:rgba(206,206,206,0.4);
             padding-top: 70px;
-            font-family: Serif;
+            font-family: "Harrington";
             /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+        .titi{
+            width: 20px;
         }
     </style>
 
@@ -36,24 +39,24 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{url("/")}}">11301169-PALABOST/11306449-PARIS</a>
+			 <a class="navbar-brand" href="{{ url('/actualites')}}">Actualités</a>
+           
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="{{url("/actualites")}}">Actualités</a>
-                </li>
+               <li><a href="{{url("/")}}">11301169-PALABOST/11306449-PARIS</a></li>
+             <li><a href="{{url('/aPropos')}}">A propos</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -61,21 +64,38 @@
     <!-- /.container -->
 </nav>
 
+
 <!-- Page Content -->
 <div class="container">
 
-   @yield('content')
-    <!-- /.row -->
+    <h1>Actualités</h1>
+    <p><a class="btn btn-primary" href="{{ route('actualites.create') }}"><img src="{{url(asset("croix.png"))}}" class="glyphicon glyphicon-align-left titi"> Ajouter une activité</a>
+        <a class="btn btn-primary" href="javascript:totot()"> Revenir à l'accueil</a></p>
+    <script type="text/javascript">
+        function totot(){
+            setTimeout(function(){
+                document.location.href = "{{ url("/")}}";
+            },2500);
 
+        }
+    </script>
+
+    @foreach($actus as $actu)
+        <div>
+            <h2>{{$actu->titre}}</h2>
+            <p>
+                {{$actu->description}}
+            </p>
+        </div>
+    @endforeach
 </div>
 <!-- /.container -->
 
 <!-- jQuery Version 1.11.1 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+   
 <!-- Bootstrap Core JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.js"></script>
 </body>
 
 </html>
